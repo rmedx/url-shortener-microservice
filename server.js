@@ -47,11 +47,7 @@ app.post('/api/shorturl', async (req, res) => {
     original_url: req.body.url, 
     short_url: short
   });
-  try {
-    await input.save()
-  } catch {
-    console.log("error saving input aka document");
-  };
+  await input.save()
   res.json({
     original_url: req.body.url, 
     short_url: short
