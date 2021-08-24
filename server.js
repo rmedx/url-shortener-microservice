@@ -60,7 +60,7 @@ app.post('/api/shorturl', async (req, res) => {
 
 // retreive original_url from database and then redirect
 app.get('/api/shorturl/:short', (req, res) => {
-  urlPair.findOne({short_url: req.params.short}).exec((err, pair) => {
+  urlPair.findOne({short_url: req.params.short}, (err, pair) => {
     if (err) {
       return console.log("error with findOne");
     }
