@@ -55,15 +55,15 @@ app.post('/api/shorturl', async (req, res) => {
 });
 
 // retreive longurl from database and then redirect
-// app.get('/api/shorturl/:short', (req, res) => {
-//   urlPair.findOne({shortUrl: __dirname + "/api/shorturl/" + req.params.short}).exec((err, pair) => {
-//     if (err) {
-//       return console.log("error");
-//     }
-//     let redirectUrl = pair.longUrl;
-//     res.redirect(redirectUrl);
-//   });
-// });
+app.get('/api/shorturl/:short', (req, res) => {
+  urlPair.findOne({shortUrl: req.params.short}).exec((err, pair) => {
+    if (err) {
+      return console.log("error");
+    }
+    let redirectUrl = pair.longUrl;
+    return res.redirect(redirectUrl);
+  });
+});
 
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
