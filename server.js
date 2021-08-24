@@ -44,19 +44,19 @@ app.get('/api/hello', function(req, res) {
 app.post('/api/shorturl', async (req, res) => {
   let short = shortid.generate();
   let input = new urlPair({
-    longUrl: req.body.url, 
-    shortUrl: short
+    original_url: req.body.url, 
+    short_url: short
   });
   await input.save();
   res.json({
-    longUrl: req.body.url, 
-    shortUrl: short
+    original_url: req.body.url, 
+    short_url: short
   });
 });
 
 // retreive longurl from database and then redirect
 app.get('/api/shorturl/:short', (req, res) => {
-  urlPair.findOne({shortUrl: req.params.short}).exec((err, pair) => {
+  urlPair.findOne({short_url: req.params.short}).exec((err, pair) => {
     if (err) {
       return console.log("error");
     }
