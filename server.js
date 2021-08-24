@@ -60,7 +60,7 @@ app.get('/api/shorturl/:short', (req, res) => {
     if (err) {
       return console.log("error");
     }
-    let redirectUrl = pair.original_url;
+    let redirectUrl = pair['original_url'];
     console.log("redirect url" + redirectUrl);
     res.redirect(redirectUrl);
   });
