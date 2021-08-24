@@ -60,14 +60,25 @@ app.post('/api/shorturl', (req, res) => {
       original_url: url, 
       short_url: short
     });
+    console.log("short " + short + " orig " + url);
+    // let newInput = input.save();
+    // if (input !== newInput) {
+    //   return console.log("error saving doc")
+    // } else {
+    //   res.json({
+    //     original_url: url, 
+    //     short_url: short
+    //   });
+    // }
     input.save((err, data) => {
       if (err) {
         return console.log("error saving doc");
+      } else {
+        res.json({
+          original_url: url, 
+          short_url: short
+        });
       }
-      res.json({
-        original_url: req.body.url, 
-        short_url: short
-      });
     })
   }
 });
