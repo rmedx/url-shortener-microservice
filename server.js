@@ -47,21 +47,24 @@ app.post('/api/shorturl', async (req, res) => {
     original_url: req.body.url, 
     short_url: short
   });
-  await input.save()
-  res.json({
-    original_url: req.body.url, 
-    short_url: short
-  });
+  input.save((err, data) => {
+    if (err) {
+      return console.log("error saving doc");
+    }
+    res.json({
+      original_url: req.body.url, 
+      short_url: short
+    });
+  })
 });
 
 // retreive original_url from database and then redirect
 app.get('/api/shorturl/:short', (req, res) => {
   urlPair.findOne({short_url: req.params.short}).exec((err, pair) => {
     if (err) {
-      return console.log("error");
+      return console.log("error with findOne");
     }
     let redirectUrl = pair['original_url'];
-    console.log("redirect url" + redirectUrl);
     res.redirect(redirectUrl);
   });
 });
