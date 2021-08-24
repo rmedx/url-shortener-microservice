@@ -59,15 +59,15 @@ app.post('/api/shorturl', async (req, res) => {
 });
 
 // retreive original_url from database and then redirect
-app.get('/api/shorturl/:short', (req, res) => {
-  urlPair.findOne({short_url: req.params.short}, (err, pair) => {
-    if (err) {
-      return console.log("error with findOne");
-    }
-    let redirectUrl = pair['original_url'];
-    res.redirect(redirectUrl);
-  });
-});
+// app.get('/api/shorturl/:short', (req, res) => {
+//   urlPair.findOne({short_url: req.params.short}, (err, pair) => {
+//     if (err) {
+//       return console.log("error with findOne");
+//     }
+//     let redirectUrl = pair['original_url'];
+//     res.redirect(redirectUrl);
+//   });
+// });
 
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
