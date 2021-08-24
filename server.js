@@ -15,8 +15,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 // schema for url pairs
 const urlPairSchema = new Schema({
-  longUrl: {type: String, required: true, unique: true},
-  shortUrl: {type: String, required: true}
+  original_url: {type: String, required: true, unique: true},
+  short_url: {type: String, required: true}
 });
 
 // model for url pairs
@@ -54,13 +54,13 @@ app.post('/api/shorturl', async (req, res) => {
   });
 });
 
-// retreive longurl from database and then redirect
+// retreive original_url from database and then redirect
 app.get('/api/shorturl/:short', (req, res) => {
   urlPair.findOne({short_url: req.params.short}).exec((err, pair) => {
     if (err) {
       return console.log("error");
     }
-    let redirectUrl = pair.longUrl;
+    let redirectUrl = pair.original_url;
     console.log("redirect url" + redirectUrl);
     res.redirect(redirectUrl);
   });
