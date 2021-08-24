@@ -45,14 +45,13 @@ app.post('/api/shorturl', async (req, res) => {
   let short = shortid.generate();
   let input = new urlPair({
     longUrl: req.body.url, 
-    shortUrl: __dirname + "/api/shorturl/" + short
+    shortUrl: short
   });
   await input.save();
-  res.json({success: "saved"});
-  // res.json({
-  //   longUrl: req.body.url, 
-  //   shortUrl: __dirname + "/api/shorturl/" + short
-  // });
+  res.json({
+    longUrl: req.body.url, 
+    shortUrl: short
+  });
 });
 
 // retreive longurl from database and then redirect
