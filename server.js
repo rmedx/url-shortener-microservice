@@ -48,22 +48,23 @@ app.post('/api/shorturl', async (req, res) => {
     shortUrl: __dirname + "/api/shorturl/" + short
   });
   await input.save();
-  res.json({
-    longUrl: req.body.url, 
-    shortUrl: __dirname + "/api/shorturl/" + short
-  });
+  res.json({success: "saved"});
+  // res.json({
+  //   longUrl: req.body.url, 
+  //   shortUrl: __dirname + "/api/shorturl/" + short
+  // });
 });
 
 // retreive longurl from database and then redirect
-app.get('/api/shorturl/:short', (req, res) => {
-  urlPair.findOne({shortUrl: __dirname + "/api/shorturl/" + req.params.short}).exec((err, pair) => {
-    if (err) {
-      return console.log("error");
-    }
-    let redirectUrl = pair.longUrl;
-    res.redirect(redirectUrl);
-  });
-});
+// app.get('/api/shorturl/:short', (req, res) => {
+//   urlPair.findOne({shortUrl: __dirname + "/api/shorturl/" + req.params.short}).exec((err, pair) => {
+//     if (err) {
+//       return console.log("error");
+//     }
+//     let redirectUrl = pair.longUrl;
+//     res.redirect(redirectUrl);
+//   });
+// });
 
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
